@@ -1,29 +1,59 @@
-//create arrays
+//Create arrays
 var characterNumeric = [0,1,2,3,4,5,6,7,8,9]
 var characterLowercase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 var characterUppercase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 var characterSpecial = ["!","#","$","%","&","(",")","*","+","-",".","/",":",";","<","=",">","?","@","[","\",","{","|","}","~"]
 
+var generate = [];
+
 //Pushes possible outcomes into array
 function generatePassword() {
-  var length = prompt("How many characters do you want in your password? (Please only choose between 8 and 128 characters)");
-  console.log(length)
+  var pwLength = prompt("How many characters do you want in your password? (Please only choose between 8 and 128 characters)");
+  console.log(pwLength)
 
-  var characterLowercase = confirm("Do you want to use lower case letters?");
-  console.log(characterLowercase)
+  if (pwLength < 8 || pwLength > 128 || isNaN(pwLength)=== true ){
+    alert("Please enter a number between 8 and 128 characters")
+    return;
+  }
 
-  var characterUppercase = confirm("Do you want to use upper case letters?");
-  console.log(characterUppercase)
+  var numeric = confirm("Do you want to use numbers?");
+  var lowercase = confirm("Do you want to use lower case letters?");
+  var uppercase = confirm("Do you want to use upper case letters?");
+  var special = confirm("Do you want to use special characters?");
+  
 
-  var characterNumeric = confirm("Do you want to use numbers?");
-  console.log(characterNumeric)
+  if (numeric) {
+    generate = generate.concat(characterNumeric)
+  }
 
-  var characterSpecial = confirm("Do you want to use special characters?");
-  console.log(characterSpecial)
+
+  if (lowercase) {
+    generate = generate.concat(characterLowercase)
+  }
+
+  if (uppercase) {
+    generate = generate.concat(characterUppercase)
+  }
+
+  if (special) {
+    generate = generate.concat(characterSpecial)
+  }
+
+  console.log(generate)
+
+  var password = [];
+
+  for (var i = 0; i < pwLength; i++) {
+    var choices = generate[Math.floor(Math.random() * generate.length)];
+    password.push(choices);
+  }
+
+  return password.join("");
 
 }
 
-//create new function that grabs all the password functions
+//Create new function that grabs all the password functions
+
 
 
 
